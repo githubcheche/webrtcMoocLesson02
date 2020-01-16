@@ -1,6 +1,7 @@
 # webrtcMoocLesson2
 
-本课主要是房间信令通信测试
+本课主要是房间信令通信测试（chatroom）和端对端SDP分析（peerconnection）
+
 
 在根目录中输入命令
 
