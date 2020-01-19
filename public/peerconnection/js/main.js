@@ -5,6 +5,7 @@ var remoteVideo = document.querySelector('video#remotevideo');
 
 var btnStart = document.querySelector('button#start');
 var btnCall = document.querySelector('button#call');
+var btnIceRestart = document.querySelector('button#iceRestart');
 var btnHangup = document.querySelector('button#hangup');
 
 var offerSdpTextarea = document.querySelector('textarea#offer');
@@ -86,6 +87,19 @@ function getOffer(desc) {
 
 }
 
+// 测试iceRestart参数对ice-ufrag的影响，默认iceRestart为false
+function restart() {
+    var offerConstraints = {
+        offerToReceiveAudio: 1,
+        offerToRecieveVideo: 1,
+        iceRestart: false
+    }
+
+    pc1.createOffer(offerConstraints)
+        .then(getOffer)
+        .catch(handleError);
+}
+
 // 开始拨打电话
 function call() {
 
@@ -143,6 +157,7 @@ function call() {
 
     btnCall.disabled = true;
     btnHangup.disabled = false;
+    btnIceRestart.disabled = false;
 }
 
 function hangup() {
@@ -153,8 +168,10 @@ function hangup() {
 
     btnCall.disabled = false;
     btnHangup.disabled = true;
+    btnIceRestart.disabled = true;
 }
 
 btnStart.onclick = start;
 btnCall.onclick = call;
 btnHangup.onclick = hangup;
+btnIceRestart.onclick = restart;
